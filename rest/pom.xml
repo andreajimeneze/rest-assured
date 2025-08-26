@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cl.kibernum</groupId>
+    <artifactId>rest</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.jupiter.version>5.10.2</junit.jupiter.version>
+        <rest.assured.version>5.4.0</rest.assured.version>
+        <assertj.version>3.25.3</assertj.version>
+        <slf4j.version>2.0.13</slf4j.version>
+    </properties>
+
+  <dependencies>
+  <!-- Rest Assured -->
+  <!-- Rest Assured core: biblioteca principal para construir y ejecutar peticiones HTTP en tests -->
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>${rest.assured.version}</version>
+      <scope>test</scope>
+    </dependency>
+  <!-- Rest Assured json-path: utilidades para navegar y extraer datos de respuestas JSON -->
+  <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>json-path</artifactId>
+      <version>${rest.assured.version}</version>
+      <scope>test</scope>
+    </dependency>
+  <!-- Rest Assured xml-path: utilidades para navegar y extraer datos de respuestas XML (no siempre usado, pero útil si la API responde XML) -->
+  <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>xml-path</artifactId>
+      <version>${rest.assured.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  <!-- JUnit 5 -->
+  <!-- JUnit Jupiter API: anotaciones y contratos para escribir tests con JUnit 5 -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+  <!-- JUnit Jupiter Engine: motor que ejecuta las pruebas escritas con JUnit 5 -->
+  <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  <!-- AssertJ -->
+  <!-- AssertJ core: API fluida y expresiva para realizar aserciones en tests (más legible que los asserts estándar) -->
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  <!-- Jackson for POJOs -->
+  <!-- Jackson Databind: serializa/deserializa objetos Java <-> JSON (necesaria para enviar/recibir POJOs en Rest Assured) -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.17.2</version>
+      <scope>test</scope>
+    </dependency>
+
+  <!-- SLF4J API + Simple for test logging -->
+  <!-- SLF4J API: interfaz estándar de logging en Java (permite cambiar la implementación sin cambiar el código) -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>test</scope>
+    </dependency>
+  <!-- SLF4J Simple: implementación simple de SLF4J adecuada para tests (muestra logs en consola) -->
+  <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <useSystemClassLoader>false</useSystemClassLoader>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
