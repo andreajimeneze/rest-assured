@@ -23,11 +23,9 @@ public class PostClient {
     public Response getPost(int id) {
         return given()
                 .spec(Specs.request())
+                .pathParam("id", id)
                 .when()
-                .get("/posts/{id}")
-                .then()
-                .spec(Specs.ok200())
-                .extract().response();
+                .get("/posts/{id}");
     }
 
     // Método para crear un post
@@ -59,7 +57,7 @@ public class PostClient {
         return given()
                 .spec(Specs.request())
                 .when()
-                .get("/posts/{id}", id)
+                .delete("/posts/{id}", id)
                 .then()
                 .spec(Specs.ok200())
                 .extract().response();

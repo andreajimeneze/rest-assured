@@ -1,0 +1,5 @@
+cl\kibernum\config\Specs.class
+cl\kibernum\client\PostClient.class
+cl\kibernum\model\Post.class
+cl\kibernum\config\Env.class
+cl\kibernum\test\PostCrudTest.class

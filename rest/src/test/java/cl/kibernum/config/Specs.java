@@ -26,30 +26,24 @@ public final class Specs{
 
     // Bloque estático: se ejecuta una vez cuando la clase se carga en memoria
     static {
-        // Obtenemos el timeout desde Env (en milisegundos)
-        int timeout = Env.timeoutMs();
+    int timeout = Env.timeoutMs();
 
-        // Construimos la RequestSpecification usando el builder
-        REQUEST_SPEC = new RequestSpecBuilder()
-                .setBaseUri(Env.baseUrl()) // Base URI tomada de Env.baseUrl()
-                .setContentType(ContentType.JSON) // Enviamos JSON en el body
-                .setAccept(ContentType.JSON) // Esperamos recibir JSON
-                .log(LogDetail.URI) // Registrar la URI en los logs (útil para depurar)
-                .build() // Construye la RequestSpecification
-                .config(config().httpClient(httpClientConfig() // Configuración del cliente HTTP
-                        .setParam("http.connection.timeout", timeout) // Timeout de conexión
-                        .setParam("http.socket.timeout", timeout) // Timeout de socket (lectura)
-                        .setParam("http.connection-manager.timeout", (long) timeout))); // Timeout del connection manager
+    // Configuración global de timeouts
+    io.restassured.RestAssured.config = config()
+            .httpClient(httpClientConfig()
+                .setParam("http.connection.timeout", timeout)
+                .setParam("http.socket.timeout", timeout)
+                .setParam("http.connection-manager.timeout", (long) timeout));
 
-        // Construimos la ResponseSpecification que espera 200 OK
-        RESPONSE_SPEC_200 = new ResponseSpecBuilder()
-                .expectStatusCode(200) // Validación del código de estado
-                .build();
+    REQUEST_SPEC = new RequestSpecBuilder()
+            .setBaseUri(Env.baseUrl())
+            .setContentType(ContentType.JSON)
+            .setAccept(ContentType.JSON)
+            .log(LogDetail.URI)
+            .build();
 
-        // Construimos la ResponseSpecification que espera 201 Created
-        RESPONSE_SPEC_201 = new ResponseSpecBuilder()
-                .expectStatusCode(201) // Validación del código de estado
-                .build();
+    RESPONSE_SPEC_200 = new ResponseSpecBuilder().expectStatusCode(200).build();
+    RESPONSE_SPEC_201 = new ResponseSpecBuilder().expectStatusCode(201).build();
     }
 
     // Constructor privado para evitar instanciación

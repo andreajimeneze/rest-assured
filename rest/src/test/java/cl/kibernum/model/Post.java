@@ -9,9 +9,8 @@ public class Post {
     public Post() {
     }
     
-    public Post(Integer userId, Integer id, String title, String body) {
+    public Post(Integer userId, String title, String body) {
         this.userId = userId;
-        this.id = id;
         this.title = title;
         this.body = body;
     }
